@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview B: Pastel Geometry (Extended)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow-x:hidden}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.slide{width:100vw;height:100vh;height:100dvh;overflow:hidden;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;position:relative;background:#c8d9e6;font-family:'Plus Jakarta Sans',sans-serif}
+
+:root{
+    --title-size:clamp(2rem,5vw,4rem);--h2-size:clamp(1.4rem,3vw,2.4rem);
+    --body-size:clamp(0.75rem,1.3vw,1.05rem);--small-size:clamp(0.6rem,0.9vw,0.8rem);
+    --pad:clamp(2rem,5vw,5rem);--gap:clamp(0.5rem,1.5vw,1.5rem);
+    --card:#faf9f7;--ink:#1a1a1a;--muted:#888;--sub:#555;
+    --sage:#5a7c6a;--pink:#f0b4d4;--mint:#a8d4c4;--lav:#9b8dc4;--violet:#7c6aad;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+}
+
+.card-main{background:var(--card);width:min(85vw,820px);max-height:85vh;padding:var(--pad);position:relative;border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,0.1)}
+
+/* Pills */
+.pills{position:absolute;right:-18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;align-items:center}
+.pill{width:12px;border-radius:6px;transition:height 0.4s var(--ease)}
+.pill:nth-child(1){height:24px;background:var(--pink)}.pill:nth-child(2){height:40px;background:var(--mint)}
+.pill:nth-child(3){height:56px;background:var(--sage)}.pill:nth-child(4){height:40px;background:var(--lav)}
+.pill:nth-child(5){height:24px;background:var(--violet)}
+
+.section-label{font-size:var(--small-size);color:var(--sage);font-weight:700;text-transform:uppercase;letter-spacing:0.2em;margin-bottom:var(--gap)}
+h2{font-weight:800;font-size:var(--h2-size);line-height:1.1;color:var(--ink);margin-bottom:var(--gap)}
+h2 em{color:var(--sage);font-style:normal}
+p,li{font-size:var(--body-size);line-height:1.6;color:var(--sub)}
+.hr-pg{width:50px;height:3px;background:var(--sage);border-radius:2px;margin:var(--gap) 0}
+
+/* Badges */
+.badge{display:inline-block;font-size:var(--small-size);font-weight:600;padding:0.35em 0.9em;border-radius:20px}
+.b-mint{background:#d4f0e4;color:#3a6b52}.b-pink{background:#f8dce8;color:#8a4060}.b-lav{background:#e4dff0;color:#5a4a7c}
+
+/* Table */
+.pg-table{width:100%;border-collapse:collapse;font-size:var(--body-size)}
+.pg-table th{font-weight:700;text-align:left;padding:clamp(0.3rem,0.5vw,0.5rem);border-bottom:2px solid var(--ink)}
+.pg-table td{padding:clamp(0.3rem,0.5vw,0.5rem);border-bottom:1px solid #e8e4df;vertical-align:top}
+.pg-table .hl{color:var(--sage);font-weight:600}
+
+/* Grid cards */
+.pg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(0.6rem,1.2vw,1.2rem)}
+.pg-card{background:#fff;border:1px solid #e8e4df;padding:clamp(0.6rem,1.2vw,1.2rem);border-radius:10px;border-left:4px solid var(--mint)}
+.pg-card:nth-child(2){border-left-color:var(--lav)}.pg-card:nth-child(3){border-left-color:var(--pink)}
+.pg-card h3{font-weight:700;font-size:var(--body-size);margin-bottom:clamp(0.2rem,0.4vw,0.4rem)}
+.pg-card p{font-size:var(--small-size)}
+
+/* Quote */
+.pg-quote{font-weight:800;font-size:clamp(1.1rem,2.2vw,1.8rem);line-height:1.35;color:var(--ink);border-left:4px solid var(--sage);border-radius:0 8px 8px 0;padding:clamp(0.8rem,1.5vw,1.5rem) clamp(1rem,2vw,2rem);background:rgba(90,124,106,0.06);max-width:min(85%,580px)}
+.pg-quote em{color:var(--sage);font-style:normal}
+
+/* Slide num */
+.snum{position:absolute;font-weight:700;font-size:var(--small-size);color:var(--muted)}
+
+.reveal{opacity:0;transform:translateY(15px);transition:opacity 0.6s var(--ease),transform 0.6s var(--ease)}
+.slide.visible .reveal{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}.reveal-d4{transition-delay:0.4s}
+
+@media(max-width:700px){.pg-grid{grid-template-columns:1fr}}
+@media(max-height:600px){:root{--pad:clamp(0.5rem,2.5vw,1.5rem);--h2-size:clamp(1.1rem,2.5vw,1.5rem)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.2s!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: TITLE -->
+<section class="slide" id="s1">
+<div class="card-main">
+    <div class="pills"><div class="pill"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div></div>
+    <p class="section-label reveal">Coursera &bull; Claude Code Seminar</p>
+    <h2 class="reveal reveal-d1" style="font-size:var(--title-size);">Sử dụng Claude Code<br><em>Hiệu quả & Có kiểm soát</em></h2>
+    <div class="hr-pg reveal reveal-d2"></div>
+    <p class="reveal reveal-d3" style="max-width:500px;">Chất lượng code, Context thông minh, và quy trình cải tiến liên tục.</p>
+    <div class="reveal reveal-d4" style="display:flex;gap:clamp(0.5rem,1vw,1rem);margin-top:var(--gap);">
+        <span class="badge b-mint">Chat &rarr; Craft</span><span class="badge b-pink">CLAUDE.md</span><span class="badge b-lav">Fix Process</span>
+    </div>
+</div>
+</section>
+
+<!-- SLIDE 2: TABLE -->
+<section class="slide" id="s2">
+<div class="card-main">
+    <div class="pills"><div class="pill"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div></div>
+    <span class="snum" style="top:var(--pad);right:calc(var(--pad) + 24px);">02</span>
+    <p class="section-label reveal">Module 3 &bull; Code Quality</p>
+    <h2 class="reveal reveal-d1">Context thay đổi <em>mọi thứ</em></h2>
+    <div class="hr-pg reveal reveal-d2"></div>
+    <table class="pg-table reveal reveal-d3">
+        <thead><tr><th style="width:28%">Tiêu chí</th><th>Không có Context</th><th>Có Context</th></tr></thead>
+        <tbody>
+            <tr><td>Error Handling</td><td>Code B thắng</td><td class="hl">Code A thắng — throw exceptions</td></tr>
+            <tr><td>Flexibility</td><td>Code A nhỉnh</td><td class="hl">Code A mạnh hơn — timestamp</td></tr>
+            <tr><td><strong>Kết quả</strong></td><td>B thắng</td><td class="hl">A thắng — hoàn toàn đảo ngược!</td></tr>
+        </tbody>
+    </table>
+    <p class="reveal reveal-d4" style="margin-top:var(--gap);font-weight:600;color:var(--sage);">Muốn code tốt? Cho AI đủ context.</p>
+</div>
+</section>
+
+<!-- SLIDE 3: CARDS -->
+<section class="slide" id="s3">
+<div class="card-main">
+    <div class="pills"><div class="pill"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div></div>
+    <span class="snum" style="top:var(--pad);right:calc(var(--pad) + 24px);">03</span>
+    <p class="section-label reveal">Module 4 &bull; Framework</p>
+    <h2 class="reveal reveal-d1">Framework <em>CONTEXT</em></h2>
+    <div class="hr-pg reveal reveal-d2"></div>
+    <div class="pg-grid reveal reveal-d3">
+        <div class="pg-card"><h3>C — Clear Instructions</h3><p>Chỉ dẫn rõ ràng, ngắn gọn</p></div>
+        <div class="pg-card"><h3>O — Operational</h3><p>Quy trình vận hành</p></div>
+        <div class="pg-card"><h3>N — Naming</h3><p>Quy ước đặt tên</p></div>
+    </div>
+    <div class="reveal reveal-d4" style="display:flex;gap:clamp(0.5rem,1vw,1rem);margin-top:var(--gap);">
+        <span class="badge b-mint">Essential Only</span><span class="badge b-pink">Specificity</span><span class="badge b-lav">Process > Micromanagement</span>
+    </div>
+</div>
+</section>
+
+<!-- SLIDE 4: QUOTE -->
+<section class="slide" id="s4">
+<div class="card-main">
+    <div class="pills"><div class="pill"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div><div class="pill"></div></div>
+    <span class="snum" style="top:var(--pad);right:calc(var(--pad) + 24px);">04</span>
+    <p class="section-label reveal">Module 7 &bull; Key Insight</p>
+    <div class="reveal reveal-d1">
+        <div class="pg-quote">Điều tệ nhất là để Claude Code xây dựng hàng đống code mà bạn <em>chưa suy nghĩ kỹ</em>.</div>
+    </div>
+    <div class="hr-pg reveal reveal-d2" style="margin-top:clamp(1.5rem,3vw,3rem);"></div>
+    <p class="reveal reveal-d3" style="max-width:450px;">Hãy thiết kế TRƯỚC KHI gửi AI đi viết code.</p>
+</div>
+</section>
+
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible')}),{threshold:0.4});
+document.querySelectorAll('.slide').forEach(s=>obs.observe(s));
+document.addEventListener('keydown',e=>{
+    const slides=document.querySelectorAll('.slide');
+    let cur=0;slides.forEach((s,i)=>{if(s.getBoundingClientRect().top<window.innerHeight/2&&s.getBoundingClientRect().bottom>0)cur=i});
+    if(e.key==='ArrowDown'||e.key===' '||e.key==='ArrowRight'){e.preventDefault();if(cur<slides.length-1)slides[cur+1].scrollIntoView({behavior:'smooth'})}
+    if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();if(cur>0)slides[cur-1].scrollIntoView({behavior:'smooth'})}
+});
+</script>
+</body>
+</html>
